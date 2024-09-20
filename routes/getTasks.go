@@ -7,17 +7,31 @@ import (
 	"strings"
 )
 
-func GetTasks(response http.ResponseWriter,request *http.Request){
-	fmt.Println("inside Get Tasks")
-	body := `{
-		"query": {
-			"match": { "assignee": "demo" }
-		},
-	}`
-	res, err := connection.Es.Search(
-		connection.Es.Search.WithIndex("*"),
-		connection.Es.Search.WithBody(strings.NewReader(body)),
-		connection.Es.Search.WithPretty(),
-	)
-	fmt.Println(res,err)
+func GetTasks(response http.ResponseWriter, request *http.Request) {
+    fmt.Println("inside Get Tasks")
+
+
+    if connection.Es == nil {
+        http.Error(response, "Elasticsearch client not initialized", http.StatusInternalServerError)
+        return
+    }
+
+    body := `{
+        "query": {
+            "match": { "assignee": "demo" }
+        }
+    }`
+
+    res, err := connection.Es.Search(
+        connection.Es.Search.WithIndex("*"),
+        connection.Es.Search.WithBody(strings.NewReader(body)),
+        connection.Es.Search.WithPretty(),
+    )
+    if err != nil {
+        http.Error(response, fmt.Sprintf("Error searching Elasticsearch: %v", err), http.StatusInternalServerError)
+        return
+    }
+
+    // Optionally, you can handle the response further or write it to the response writer
+    fmt.Println(res)
 }

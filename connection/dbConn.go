@@ -9,7 +9,7 @@ import (
 var Es *v8.Client
 var err error
 
-func dbConn() {
+func init() {
 	cfg := v8.Config{
 		Addresses: []string{
 			"http://34.93.102.191:9200",
