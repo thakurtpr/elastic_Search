@@ -10,6 +10,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 )
 
 func main(){
