@@ -7,7 +7,7 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/gorilla/mux"
-	"routes"
+	"elastic_Search/routes"
 )
 
 func main(){
@@ -18,6 +18,6 @@ func main(){
 	
 	fmt.Println(os.Getenv("ELASTIC_URL"))
 
-	routes:=mux.NewRouter();
-	routes.Get("/",getTasks)
+	r:=mux.NewRouter();
+	r.HandleFunc("/",routes.GetTasks)
 }

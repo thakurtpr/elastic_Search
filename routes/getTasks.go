@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
-func getTasks(response http.ResponseWriter,request *http.Request){
-	
+func GetTasks(response http.ResponseWriter,request *http.Request){
+	fmt.Println("inside Get Tasks")
+
 }
