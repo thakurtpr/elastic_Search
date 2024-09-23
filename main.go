@@ -1,28 +1,18 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
-	"os"
-
 	"elastic_Search/routes"
-
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 )
 
 func main(){
-	err := godotenv.Load("./env/.config")
-	if err != nil {
-		log.Fatal("Error loading .env file :", err)
-	}
-	
-	fmt.Println(os.Getenv("ELASTIC_URL"))
-
 	r:=mux.NewRouter();
+
 	r.HandleFunc("/",routes.GetTasks)
+	
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,

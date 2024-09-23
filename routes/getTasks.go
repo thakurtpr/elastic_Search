@@ -18,7 +18,7 @@ func GetTasks(response http.ResponseWriter, request *http.Request) {
 
     body := `{
         "query": {
-            "match": { "assignee": "demo" }
+            "match": { "assignee": "ajit" }
         }
     }`
 
@@ -32,6 +32,9 @@ func GetTasks(response http.ResponseWriter, request *http.Request) {
         return
     }
 
+	
+	response.WriteHeader(http.StatusOK)
+	response.Write([]byte(res.String()))
     // Optionally, you can handle the response further or write it to the response writer
-    fmt.Println(res)
+    // fmt.Println(res)
 }
